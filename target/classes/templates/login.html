@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset = "ISO-8859-1" />
+  <link th:href="@{/css/styles.css}" rel="stylesheet">
+  <title>Spring Boot Application</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+
+<h1 style="margin: 30px">Login / Register</h1>
+<br><br>
+
+  <form class="form-group" th:action="@{/login}" method="post" tyle="margin: 10px">
+    <label for="username">Name</label>
+    <input type="text" id="username" placeholder="Username" th:name="username">
+    <label for="password">Password</label>
+    <input type="text" id="password" placeholder="Password" th:name="password">
+    <input type="submit" value="Login" class="btn btn-primary btn-sm">
+  </form>
+
+  <br>
+
+  <form class="form-group" th:action="@{/register}" method="post" tyle="margin: 10px">
+    <label for="signup_username">Name</label>
+    <input type="text" id="signup_username" placeholder="Username" th:name="signup_username">
+    <label for="signup_password">Password</label>
+    <input type="text" id="signup_password" placeholder="Password" th:name="signup_password">
+    <input type="submit" value="Sign Up" class="btn btn-primary btn-sm">
+  </form>
+
+  <div th:if="${error != null}">
+    <h3>Invalid Credentials</h3>
+  </div>
+
+  <div th:if="${inputBlank != null}">
+    <h3>Do not leave any field blank</h3>
+  </div>
+
+  <div th:if="${usernameExists != null}">
+    <h3>This username is already registered.</h3>
+  </div>
+
+  <div th:if="${registrationSuccessful != null}">
+    <h3>Registration successful!</h3>
+  </div>
+</body>
+</html>

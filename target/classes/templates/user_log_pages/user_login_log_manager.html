@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>User Login Log Manager Portal</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+
+
+<div class="container my-2">
+  <h1>User Management Console</h1>
+
+  <br>
+
+  <form class="btn-group">
+    <input type="submit" value="user management" th:formaction="@{/user_manager}" class="btn btn-primary">
+    <input type="submit" value="login log" th:formaction="@{/user_login_log_manager}" class="btn btn-primary active">
+  </form>
+
+  <br><br>
+
+  <form th:action="@{/search_user_sessions_by_username}" class="form-inline" style="padding: 20px">
+    <input type="text" th:name="search_username" th:value="${usernamePlaceholder}" class="form-control">
+    <button type="submit" class="btn btn-info col-2" style="margin: 10px"> Search User </button>
+  </form>
+
+  <form th:action="@{/search_user_sessions_by_login_time}" class="form-inline" style="padding: 20px">
+    <input type="datetime-local" th:name="search_datetime" class="form-control"/>
+    <button type="submit" class="btn btn-info col-2" style="margin: 10px"> Search User </button>
+  </form>
+
+  <br>
+
+  <table border="1" class="table table-striped table-responsive-md">
+    <thead>
+    <tr>
+      <th>Username</th>
+      <th>Login Time</th>
+      <th>Login IP</th>
+      <th>Session ID</th>
+      <th>Logout Time</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="userSession : ${listUserSessions}">
+      <td th:text="${userSession.username}"></td>
+      <td th:text="${userSession.login_time}"></td>
+      <td th:text="${userSession.login_ip}"></td>
+      <td th:text="${userSession.session_id}"></td>
+      <td th:text="${userSession.logout_time}"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>
